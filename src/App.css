@@ -11,10 +11,18 @@ body {
     grid-template-columns: repeat(4, 6rem);
     grid-template-rows: minmax(7rem, auto) repeat(6, 6rem);
     border-radius: 10rem;
+
 }
 
 .calculator>button {
     font-size: 28px;
+    cursor: pointer;
+    background-color: rgba(37, 100, 172, 0.5);
+}
+
+.calculator>button:hover,
+.calculator>button:focus {
+    background-color: rgba(153, 198, 219, 0.534);
 }
 
 .button2 {
