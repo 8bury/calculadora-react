@@ -26,7 +26,15 @@ const calculate = (prev, current, operation) => {
 function reducer(state, { type, payload }) {
   switch (type) {
     case ACTIONS.ADD_DIGIT:
-      if(state.digit == "." && state.currentOperand.includes(".")){
+      if(state.overwrite) {
+        return{
+          ...state,
+          previousOperand: "",
+          currentOperand: payload.digit,
+          overwrite: false
+        }
+      }
+      if(payload.digit === "." && state.currentOperand.includes(".")){
         return state
       }
       return {
@@ -64,7 +72,8 @@ function reducer(state, { type, payload }) {
         ...state,
         previousOperand: "",
         currentOperand: calculate(state.previousOperand, state.currentOperand, state.operator).toString(),
-        operator: ""
+        operator: "",
+        overwrite: true
       };
       case ACTIONS.CLEAR:
         return {
@@ -96,7 +105,8 @@ function App() {
   const [{ currentOperand, previousOperand, operator }, dispatch] = useReducer(reducer, {
     currentOperand: "",
     previousOperand: "",
-  operator: "",})
+  operator: "",
+overwrite: false})
 
   return (
     <div className="calculator">
