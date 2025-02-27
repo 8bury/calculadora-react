@@ -26,6 +26,9 @@ const calculate = (prev, current, operation) => {
 function reducer(state, { type, payload }) {
   switch (type) {
     case ACTIONS.ADD_DIGIT:
+      if(state.digit == "." && state.currentOperand.includes(".")){
+        return state
+      }
       return {
         ...state,
         currentOperand: `${state.currentOperand}${payload.digit}`
